@@ -6,11 +6,35 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 14:59:45 by lleverge          #+#    #+#             */
-/*   Updated: 2016/10/20 16:25:51 by lleverge         ###   ########.fr       */
+/*   Updated: 2016/10/20 17:01:19 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void        check_param(int ac, char **env)
+{
+    if (ac != 2 || !env || !(*env))
+    {
+        if (ac != 2)
+            ft_putendl_fd("fdf: usage: ./fdf file1", 2);
+        if (!env || !(*env))
+            ft_putendl_fd("fdf: cant be launch with empty env", 2);
+        exit(1);
+    }
+}
+
+static t_map		*init_map(void)
+{
+	t_map	*map;
+
+	if (!(map = (t_map *)malloc(sizeof(t_map))))
+		exit(1);
+	map->y_map = 0;
+	map->x_map = 0;
+	map->h_map = 0;
+	return (map);
+}
 
 static t_env		*init_env(char *av)
 {
@@ -32,9 +56,11 @@ static t_env		*init_env(char *av)
 int					main(int ac, char **av, char **environ)
 {
 	t_env	*env;
+	t_map	*map;
 
 	check_param(ac, environ);
 	env = init_env(av[1]);
+	map = init_map();
 	ft_read_map(env);
 	return (0);
 }

@@ -6,12 +6,12 @@
 #    By: lleverge <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/21 17:32:58 by lleverge          #+#    #+#              #
-#    Updated: 2016/10/20 16:19:19 by lleverge         ###   ########.fr        #
+#    Updated: 2016/10/20 17:19:45 by lleverge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
-SRC = main.c	read_map.c	error.c
+SRC = main.c	map.c	error.c
 OBJ = $(SRC:.c=.o)
 LIB = ./libft/libft.a
 FLAGS = -Wall -Wextra -Werror
