@@ -6,22 +6,22 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 14:59:45 by lleverge          #+#    #+#             */
-/*   Updated: 2016/10/20 17:01:19 by lleverge         ###   ########.fr       */
+/*   Updated: 2016/10/20 18:03:24 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void        check_param(int ac, char **env)
+static void			check_param(int ac, char **env)
 {
-    if (ac != 2 || !env || !(*env))
-    {
-        if (ac != 2)
-            ft_putendl_fd("fdf: usage: ./fdf file1", 2);
-        if (!env || !(*env))
-            ft_putendl_fd("fdf: cant be launch with empty env", 2);
-        exit(1);
-    }
+	if (ac != 2 || !env || !(*env))
+	{
+		if (ac != 2)
+			ft_putendl_fd("fdf: usage: ./fdf file1", 2);
+		if (!env || !(*env))
+			ft_putendl_fd("fdf: cant be launch with empty env", 2);
+		exit(1);
+	}
 }
 
 static t_map		*init_map(void)
@@ -51,7 +51,6 @@ static t_env		*init_env(char *av)
 	env->x_win = 1200;
 	return (env);
 }
-
 
 int					main(int ac, char **av, char **environ)
 {

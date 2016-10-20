@@ -6,31 +6,42 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:21:08 by lleverge          #+#    #+#             */
-/*   Updated: 2016/10/20 17:20:37 by lleverge         ###   ########.fr       */
+/*   Updated: 2016/10/20 18:12:35 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+static int		tablen(char **tab)
+{
+	int			i;
+
+	i = 0;
+	while (tab[i] != 0)
+		i++;
+	return (i);
+}
+
 static void		read_map(char *av, t_env *env, t_map *map)
 {
-	int		i;
 	char	*line;
 	char	**tab;
 
-	i = 0;
-	if ((env->fd = open(av, O_RDONLY)) == -1)
-		exit(1);
-	if (!(map->draw = (int **)malloc(sizeof(int *) * (map->y_map))))
-		exit(1);
-	while (get_next_line(env->fd, &line) > 0)
+	while (get_next_line(env->fd, &line) == 1)
 	{
 		tab = ft_strsplit(line, ' ');
 		if (tab)
+		{
 			ft_strdel(&line);
-		save_map(map, tab, map->y_map - 1 - i);
-		free_tab(tab);
-		i++;
+			check_line(tab);
+			if (map->x_map == 0)
+				map->x_map = tablen(tab);
+			else if (map->x_map != 0)
+				if (map->x_map != tablen(tab))
+					ft_putendl_fd("fdf: all lines must have same length", 2);
+			ft_freetab(split);
+			map->y_map++;
+		}
 	}
 	close(env->fd);
 }
