@@ -6,19 +6,20 @@
 #    By: lleverge <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/21 17:32:58 by lleverge          #+#    #+#              #
-#    Updated: 2016/10/20 14:53:47 by lleverge         ###   ########.fr        #
+#    Updated: 2016/10/20 16:19:19 by lleverge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
-SRC =
+SRC = main.c	read_map.c	error.c
 OBJ = $(SRC:.c=.o)
 LIB = ./libft/libft.a
 FLAGS = -Wall -Wextra -Werror
+OTHERS = -lmlx -framework OpenGl -framework AppKit
 
 $(NAME): $(OBJ)
 	make -C ./libft
-	gcc $(FLAGS) $(OBJ) $(LIB) -o $(NAME)
+	gcc $(FLAGS) $(OBJ) $(LIB) $(OTHERS) -o $(NAME)
 
 all: $(NAME)
 
