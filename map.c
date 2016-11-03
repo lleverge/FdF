@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:21:08 by lleverge          #+#    #+#             */
-/*   Updated: 2016/11/03 13:01:55 by lleverge         ###   ########.fr       */
+/*   Updated: 2016/11/03 14:29:23 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,10 @@ static int		check_line(char **map)
 	return (1);
 }
 
-static int		**init_draw(char *av, t_map *map, t_env *env)
+static int		**init_draw(t_map *map)
 {
 	int		**draw;
-	char	*line;
-	char	**tab;
 	int		i;
-	int		j;
 
 	i = 0;
 	if (!(draw = (int **)malloc(sizeof(int *) * map->y_map)))
@@ -62,6 +59,16 @@ static int		**init_draw(char *av, t_map *map, t_env *env)
 			exit(-1);
 		i++;
 	}
+	return (draw);
+}
+
+static void		copy_map(char *av, int **draw, t_map *map, t_env *env)
+{
+	char	*line;
+	char	**tab;
+	int		i;
+	int		j;
+
 	i = 0;
 	if ((env->fd = open(av, O_RDONLY)) == -1)
 		exit(1);
@@ -79,27 +86,6 @@ static int		**init_draw(char *av, t_map *map, t_env *env)
 			}
 			i++;
 		}
-	}
-	return (draw);
-}
-
-static void		print_draw(int **draw, int x, int y)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	while (i < y)
-	{
-		j = 0;
-		while (j < x)
-		{
-			ft_putnbr(draw[i][j]);
-			ft_putchar(' ');
-			j++;
-		}
-		ft_putchar('\n');
-		i++;
 	}
 }
 
@@ -120,14 +106,12 @@ void			read_map(char *av, t_env *env, t_map *map)
 				map->x_map = tablen(tab);
 			else if (map->x_map != 0)
 				if (map->x_map != tablen(tab))
-				{
-					ft_putendl_fd("fdf: all lines must have same length", 2);
-					exit(-1);
-				}
+					error_length();
 			ft_freetab(tab);
 			map->y_map++;
 		}
 	}
-	map->draw = init_draw(av, map, env);
+	map->draw = init_draw(map);
+	copy_map(av, map->draw, map, env);
 	close(env->fd);
 }

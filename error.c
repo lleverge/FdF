@@ -6,8 +6,14 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:13:17 by lleverge          #+#    #+#             */
-/*   Updated: 2016/10/20 17:00:10 by lleverge         ###   ########.fr       */
+/*   Updated: 2016/11/03 14:28:49 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void		error_length(void)
+{
+	ft_putendl_fd("fdf: all lines must have same length", 2);
+	exit(-1);
+}

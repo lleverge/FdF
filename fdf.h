@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:10:05 by lleverge          #+#    #+#             */
-/*   Updated: 2016/11/03 13:00:44 by lleverge         ###   ########.fr       */
+/*   Updated: 2016/11/03 14:29:09 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,5 @@ typedef struct		s_map
 
 void				read_map(char *av, t_env *env, t_map *map);
 void				ft_freetab(char **tab);
+void				error_length(void);
 #endif
