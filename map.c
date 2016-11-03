@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:21:08 by lleverge          #+#    #+#             */
-/*   Updated: 2016/11/03 14:29:23 by lleverge         ###   ########.fr       */
+/*   Updated: 2016/11/03 15:11:39 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ static int		check_line(char **map)
 			if (!ft_isdigit(map[i][j]))
 			{
 				ft_putendl_fd("fdf: map must contains only numbers", 2);
-				return (0);
+				exit(-1);
 			}
 			j++;
 		}
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
 static int		**init_draw(t_map *map)
@@ -87,21 +87,22 @@ static void		copy_map(char *av, int **draw, t_map *map, t_env *env)
 			i++;
 		}
 	}
+	map->zoom = env->x_win / (((map->x_map + map->y_map) / 2) * 3);
 }
 
-void			read_map(char *av, t_env *env, t_map *map)
+void			read_map(char *av, t_env *env, t_map *map, int flag)
 {
 	char	*line;
 	char	**tab;
 
 	while (get_next_line(env->fd, &line) == 1)
 	{
+		flag = 0;
 		tab = ft_strsplit(line, ' ');
 		if (tab)
 		{
 			ft_strdel(&line);
-			if (!check_line(tab))
-				exit(-1);
+			check_line(tab);
 			if (map->x_map == 0)
 				map->x_map = tablen(tab);
 			else if (map->x_map != 0)
@@ -114,4 +115,6 @@ void			read_map(char *av, t_env *env, t_map *map)
 	map->draw = init_draw(map);
 	copy_map(av, map->draw, map, env);
 	close(env->fd);
+	if (flag)
+		empty_map();
 }

@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 14:59:45 by lleverge          #+#    #+#             */
-/*   Updated: 2016/11/03 12:59:56 by lleverge         ###   ########.fr       */
+/*   Updated: 2016/11/03 15:26:27 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ static t_map		*init_map(void)
 	map->y_map = 0;
 	map->x_map = 0;
 	map->h_map = 0;
+	map->zoom = 20;
+	map->height = 3;
+	map->factor = 0.5;
+	map->offset_x = -300;
+	map->offset_y = 500;
 	return (map);
 }
 
@@ -64,6 +69,7 @@ int					main(int ac, char **av, char **environ)
 	check_param(ac, environ);
 	env = init_env(av[1]);
 	map = init_map();
-	read_map(av[1], env, map);
+	read_map(av[1], env, map, 1);
+	draw_map(env, map);
 	return (0);
 }

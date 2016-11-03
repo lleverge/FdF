@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/20 16:13:17 by lleverge          #+#    #+#             */
-/*   Updated: 2016/11/03 14:40:41 by lleverge         ###   ########.fr       */
+/*   Created: 2016/11/03 14:51:41 by lleverge          #+#    #+#             */
+/*   Updated: 2016/11/03 15:13:37 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void		error_length(void)
+void			draw_map(t_env *env, t_map *map)
 {
-	ft_putendl_fd("fdf: all lines must have same length", 2);
-	exit(-1);
-}
-
-void		empty_map(void)
-{
-	ft_putendl_fd("fdf: map is empty", 2);
-	exit(-1);
+	env->mlx = mlx_init();
+	env->win = mlx_new_window(env->mlx, env->x_win, env->y_win, "FdF");
+	map->mlx = env->mlx;
+	map->win = env->win;
+	put_map(map);
+	mlx_key_hook(env->win, &ft_keyhook, map);
+	mlx_loop(env->mlx);
 }

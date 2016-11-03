@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/20 16:13:17 by lleverge          #+#    #+#             */
-/*   Updated: 2016/11/03 14:40:41 by lleverge         ###   ########.fr       */
+/*   Created: 2016/11/03 15:19:30 by lleverge          #+#    #+#             */
+/*   Updated: 2016/11/03 15:19:45 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void		error_length(void)
+int				get_color(t_map *map)
 {
-	ft_putendl_fd("fdf: all lines must have same length", 2);
-	exit(-1);
-}
-
-void		empty_map(void)
-{
-	ft_putendl_fd("fdf: map is empty", 2);
-	exit(-1);
+	if (map->seg.z1 > 0 && map->seg.z2 > 0)
+		return (RED);
+	else if (map->seg.z1 > 0 || map->seg.z2 > 0)
+		return (ORANGE);
+	else if (map->seg.z1 < 0 && map->seg.z2 < 0)
+		return (D_BLUE);
+	else if (map->seg.z1 < 0 || map->seg.z2 < 0)
+		return (L_BLUE);
+	else
+		return (BASE_COLOR);
 }
