@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 14:59:45 by lleverge          #+#    #+#             */
-/*   Updated: 2016/11/03 10:50:49 by lleverge         ###   ########.fr       */
+/*   Updated: 2016/11/03 12:59:56 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,14 @@ int					main(int ac, char **av, char **environ)
 {
 	t_env	*env;
 	t_map	*map;
+	int		i;
+	int		j;
 
+	i = 0;
+	j = 0;
 	check_param(ac, environ);
 	env = init_env(av[1]);
 	map = init_map();
-	read_map(env, map);
+	read_map(av[1], env, map);
 	return (0);
 }

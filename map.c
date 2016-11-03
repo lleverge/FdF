@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:21:08 by lleverge          #+#    #+#             */
-/*   Updated: 2016/11/03 10:56:59 by lleverge         ###   ########.fr       */
+/*   Updated: 2016/11/03 13:01:55 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,65 @@ static int		check_line(char **map)
 	return (1);
 }
 
-void			read_map(t_env *env, t_map *map)
+static int		**init_draw(char *av, t_map *map, t_env *env)
+{
+	int		**draw;
+	char	*line;
+	char	**tab;
+	int		i;
+	int		j;
+
+	i = 0;
+	if (!(draw = (int **)malloc(sizeof(int *) * map->y_map)))
+		exit(-1);
+	while (i < map->y_map)
+	{
+		if (!(draw[i] = (int *)malloc(sizeof(int) * map->x_map)))
+			exit(-1);
+		i++;
+	}
+	i = 0;
+	if ((env->fd = open(av, O_RDONLY)) == -1)
+		exit(1);
+	while (get_next_line(env->fd, &line) == 1)
+	{
+		j = 0;
+		tab = ft_strsplit(line, ' ');
+		if (tab)
+		{
+			ft_strdel(&line);
+			while (j < map->x_map)
+			{
+				draw[i][j] = ft_atoi(tab[j]);
+				j++;
+			}
+			i++;
+		}
+	}
+	return (draw);
+}
+
+static void		print_draw(int **draw, int x, int y)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < y)
+	{
+		j = 0;
+		while (j < x)
+		{
+			ft_putnbr(draw[i][j]);
+			ft_putchar(' ');
+			j++;
+		}
+		ft_putchar('\n');
+		i++;
+	}
+}
+
+void			read_map(char *av, t_env *env, t_map *map)
 {
 	char	*line;
 	char	**tab;
@@ -70,5 +128,6 @@ void			read_map(t_env *env, t_map *map)
 			map->y_map++;
 		}
 	}
+	map->draw = init_draw(av, map, env);
 	close(env->fd);
 }
