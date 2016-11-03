@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 14:59:45 by lleverge          #+#    #+#             */
-/*   Updated: 2016/10/20 18:03:24 by lleverge         ###   ########.fr       */
+/*   Updated: 2016/11/03 10:50:49 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ int					main(int ac, char **av, char **environ)
 	check_param(ac, environ);
 	env = init_env(av[1]);
 	map = init_map();
-	ft_read_map(env);
+	read_map(env, map);
 	return (0);
 }

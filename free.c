@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/20 15:10:05 by lleverge          #+#    #+#             */
-/*   Updated: 2016/11/03 10:51:19 by lleverge         ###   ########.fr       */
+/*   Created: 2016/11/03 10:46:45 by lleverge          #+#    #+#             */
+/*   Updated: 2016/11/03 10:48:24 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# include "mlx.h"
-# include "libft/libft.h"
+#include "fdf.h"
 
-typedef struct		s_env
+void		ft_freetab(char **tab)
 {
-	int				fd;
-	void			*mlx;
-	void			*win;
-	int				x_win;
-	int				y_win;
-}					t_env;
+	int		i;
 
-typedef struct		s_map
-{
-	int		y_map;
-	int		x_map;
-	int		h_map;
-	int		**draw;
-}					t_map;
-
-void				read_map(t_env *env, t_map *map);
-void				ft_freetab(char **tab);
-#endif
+	i = 0;
+	while (tab[i] != 0)
+	{
+		ft_strdel(&tab[i]);
+		i++;
+	}
+	free(tab);
+}
