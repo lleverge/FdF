@@ -6,26 +6,29 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 15:16:19 by lleverge          #+#    #+#             */
-/*   Updated: 2016/11/03 15:25:34 by lleverge         ###   ########.fr       */
+/*   Updated: 2016/11/04 14:39:09 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
 static void		draw_seg(t_map *map, int i, int j)
 {
-	double	x;
-	double	y;
+	double			x;
+	double			y;
+	unsigned long	img_color;
 
 	i = 0;
 	j = 0;
 	x = map->seg.x1;
 	map->seg.dx = map->seg.x2 - map->seg.x1;
 	map->seg.dy = map->seg.y2 - map->seg.y1;
+	img_color = mlx_get_color_value(map->mlx, ORANGE);
 	while (x < map->seg.x2)
 	{
 		y = map->seg.y1 + map->seg.dy * (x - map->seg.x1) / map->seg.dx;
-		mlx_pixel_put(map->mlx, map->win, x, y, get_color(map));
+		my_pixel_put_to_image(map->image, x, y);
 		x += 0.2;
 	}
 }

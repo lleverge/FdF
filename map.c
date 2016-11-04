@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:21:08 by lleverge          #+#    #+#             */
-/*   Updated: 2016/11/03 15:11:39 by lleverge         ###   ########.fr       */
+/*   Updated: 2016/11/04 10:36:57 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int		check_line(char **map)
 		j = 0;
 		while (map[i][j] != '\0')
 		{
-			if (!ft_isdigit(map[i][j]))
+			if (!ft_isdigit(map[i][j]) && map[i][j] != '-')
 			{
 				ft_putendl_fd("fdf: map must contains only numbers", 2);
 				exit(-1);
