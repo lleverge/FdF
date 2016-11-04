@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:10:05 by lleverge          #+#    #+#             */
-/*   Updated: 2016/11/04 14:54:22 by lleverge         ###   ########.fr       */
+/*   Updated: 2016/11/04 16:13:52 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ void				draw_map(t_env *env, t_map *map);
 int					ft_keyhook(int keycode, t_map *map);
 void				put_map(t_map *map);
 int					get_color(t_map *map);
-int					my_pixel_put_to_image(t_img *im, int x, int y);
+int					my_pixel_image(t_img *im, unsigned int color, int x, int y);
 void				draw_again(t_map *map);
 #endif

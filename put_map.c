@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 15:16:19 by lleverge          #+#    #+#             */
-/*   Updated: 2016/11/04 14:39:09 by lleverge         ###   ########.fr       */
+/*   Updated: 2016/11/04 16:11:57 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ static void		draw_seg(t_map *map, int i, int j)
 	x = map->seg.x1;
 	map->seg.dx = map->seg.x2 - map->seg.x1;
 	map->seg.dy = map->seg.y2 - map->seg.y1;
-	img_color = mlx_get_color_value(map->mlx, ORANGE);
+	img_color = mlx_get_color_value(map->mlx, get_color(map));
 	while (x < map->seg.x2)
 	{
 		y = map->seg.y1 + map->seg.dy * (x - map->seg.x1) / map->seg.dx;
-		my_pixel_put_to_image(map->image, x, y);
-		x += 0.2;
+		my_pixel_put_to_image(map->image, img_color, x, y);
+		x += 0.1;
 	}
 }
 

@@ -6,24 +6,30 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:51:41 by lleverge          #+#    #+#             */
-/*   Updated: 2016/11/04 14:54:02 by lleverge         ###   ########.fr       */
+/*   Updated: 2016/11/04 16:13:20 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int				my_pixel_put_to_image(t_img *img, int x, int y)
+int				my_pixel_image(t_img *img, unsigned int color, int x, int y)
 {
-	int	i;
+	unsigned int	r;
+	unsigned int	g;
+	unsigned int	b;
+	int				i;
 
 	i = 0;
 	img->data = mlx_get_data_addr(img->image, &(img->bpp),
 								&(img->size_line), &(img->endian));
+	r = (color & 0x00ff0000) >> 16;
+	g = (color & 0x0000ff00) >> 8;
+	b = color & 0x0000ff00;
 	while (i != img->bpp / 8)
 	{
-		img->data[(y * img->size_line) + (x * (img->bpp / 8)) + i++] = 255;
-		img->data[(y * img->size_line) + (x * (img->bpp / 8)) + i++] = 100;
-		img->data[(y * img->size_line) + (x * (img->bpp / 8)) + i++] = 105;
+		img->data[(y * img->size_line) + (x * (img->bpp / 8)) + i++] = r;
+		img->data[(y * img->size_line) + (x * (img->bpp / 8)) + i++] = g;
+		img->data[(y * img->size_line) + (x * (img->bpp / 8)) + i++] = b;
 		img->data[(y * img->size_line) + (x * (img->bpp / 8)) + i++] = 0;
 	}
 	return (0);
