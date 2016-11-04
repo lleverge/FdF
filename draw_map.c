@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:51:41 by lleverge          #+#    #+#             */
-/*   Updated: 2016/11/04 16:13:20 by lleverge         ###   ########.fr       */
+/*   Updated: 2016/11/04 17:32:59 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void			draw_again(t_map *map)
 	map->image->image = mlx_new_image(map->mlx, map->x_win, map->y_win);
 	put_map(map);
 	mlx_put_image_to_window(map->mlx, map->win, map->image->image, 0, 0);
+	mlx_destroy_image(map->mlx, map->image->image);
 	mlx_key_hook(map->win, &ft_keyhook, map);
 	mlx_loop(map->mlx);
-	mlx_destroy_image(map->mlx, map->image->image);
 }
 
 void			draw_map(t_env *env, t_map *map)

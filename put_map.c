@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 15:16:19 by lleverge          #+#    #+#             */
-/*   Updated: 2016/11/04 16:11:57 by lleverge         ###   ########.fr       */
+/*   Updated: 2016/11/04 17:42:05 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ static void		draw_seg(t_map *map, int i, int j)
 	map->seg.dx = map->seg.x2 - map->seg.x1;
 	map->seg.dy = map->seg.y2 - map->seg.y1;
 	img_color = mlx_get_color_value(map->mlx, get_color(map));
-	while (x < map->seg.x2)
+	while (x < map->seg.x2 && x < map->x_win && x >= 0)
 	{
 		y = map->seg.y1 + map->seg.dy * (x - map->seg.x1) / map->seg.dx;
-		my_pixel_put_to_image(map->image, img_color, x, y);
+		my_pixel_image(map->image, img_color, x, y);
 		x += 0.1;
 	}
 }
@@ -46,10 +46,6 @@ static void		convert_iso(t_map *map)
 	y2 = map->seg.y2;
 	map->seg.x1 = x1 + y1;
 	map->seg.x2 = x2 + y2;
-	if (!map->seg.z1)
-		map->color = BASE_COLOR;
-	else if (map->seg.z1)
-		map->color = RED;
 	map->seg.y1 = (y1 * map->factor) - (map->factor * (x1 + map->seg.z1));
 	map->seg.y2 = (y2 * map->factor) - (map->factor * (x2 + map->seg.z2));
 }
