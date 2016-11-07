@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:21:08 by lleverge          #+#    #+#             */
-/*   Updated: 2016/11/04 10:36:57 by lleverge         ###   ########.fr       */
+/*   Updated: 2016/11/07 12:19:11 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,6 @@ static int		tablen(char **tab)
 	while (tab[i] != 0)
 		i++;
 	return (i);
-}
-
-static int		check_line(char **map)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	while (map[i] != 0)
-	{
-		j = 0;
-		while (map[i][j] != '\0')
-		{
-			if (!ft_isdigit(map[i][j]) && map[i][j] != '-')
-			{
-				ft_putendl_fd("fdf: map must contains only numbers", 2);
-				exit(-1);
-			}
-			j++;
-		}
-		i++;
-	}
-	return (0);
 }
 
 static int		**init_draw(t_map *map)
@@ -60,6 +37,14 @@ static int		**init_draw(t_map *map)
 		i++;
 	}
 	return (draw);
+}
+
+static int		write_map(char *tab)
+{
+	if (check_coord(tab) == -1)
+		return (0);
+	else
+		return (ft_atoi(tab));
 }
 
 static void		copy_map(char *av, int **draw, t_map *map, t_env *env)
@@ -81,7 +66,7 @@ static void		copy_map(char *av, int **draw, t_map *map, t_env *env)
 			ft_strdel(&line);
 			while (j < map->x_map)
 			{
-				draw[i][j] = ft_atoi(tab[j]);
+				draw[i][j] = write_map(tab[j]);
 				j++;
 			}
 			i++;
@@ -102,7 +87,6 @@ void			read_map(char *av, t_env *env, t_map *map, int flag)
 		if (tab)
 		{
 			ft_strdel(&line);
-			check_line(tab);
 			if (map->x_map == 0)
 				map->x_map = tablen(tab);
 			else if (map->x_map != 0)
@@ -112,9 +96,9 @@ void			read_map(char *av, t_env *env, t_map *map, int flag)
 			map->y_map++;
 		}
 	}
+	if (flag)
+		empty_map();
 	map->draw = init_draw(map);
 	copy_map(av, map->draw, map, env);
 	close(env->fd);
-	if (flag)
-		empty_map();
 }
