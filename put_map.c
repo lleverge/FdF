@@ -6,27 +6,30 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 15:16:19 by lleverge          #+#    #+#             */
-/*   Updated: 2016/11/03 15:25:34 by lleverge         ###   ########.fr       */
+/*   Updated: 2016/11/09 18:29:53 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
 static void		draw_seg(t_map *map, int i, int j)
 {
-	double	x;
-	double	y;
+	double			x;
+	double			y;
+	unsigned long	img_color;
 
 	i = 0;
 	j = 0;
 	x = map->seg.x1;
 	map->seg.dx = map->seg.x2 - map->seg.x1;
 	map->seg.dy = map->seg.y2 - map->seg.y1;
-	while (x < map->seg.x2)
+	img_color = mlx_get_color_value(map->mlx, get_color(map));
+	while (x < map->seg.x2 && x < map->x_win && x >= 0)
 	{
 		y = map->seg.y1 + map->seg.dy * (x - map->seg.x1) / map->seg.dx;
-		mlx_pixel_put(map->mlx, map->win, x, y, get_color(map));
-		x += 0.2;
+		my_pixel_image(map->image, img_color, x, y);
+		x += 0.1;
 	}
 }
 
@@ -43,10 +46,6 @@ static void		convert_iso(t_map *map)
 	y2 = map->seg.y2;
 	map->seg.x1 = x1 + y1;
 	map->seg.x2 = x2 + y2;
-	if (!map->seg.z1)
-		map->color = BASE_COLOR;
-	else if (map->seg.z1)
-		map->color = RED;
 	map->seg.y1 = (y1 * map->factor) - (map->factor * (x1 + map->seg.z1));
 	map->seg.y2 = (y2 * map->factor) - (map->factor * (x2 + map->seg.z2));
 }

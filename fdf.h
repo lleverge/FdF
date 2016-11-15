@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:10:05 by lleverge          #+#    #+#             */
-/*   Updated: 2016/11/03 15:20:08 by lleverge         ###   ########.fr       */
+/*   Updated: 2016/11/07 12:09:18 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@
 # define L_BLUE 0x005EB6DD
 # define D_BLUE 0x00046380
 # define RED 0x00B9121B
+
+typedef struct		s_img
+{
+	void	*image;
+	char	*data;
+	int		bpp;
+	int		size_line;
+	int		endian;
+}					t_img;
 
 typedef struct		s_seg
 {
@@ -44,21 +53,25 @@ typedef struct		s_env
 
 typedef struct		s_map
 {
-	int		y_map;
-	int		x_map;
-	int		h_map;
-	int		**draw;
-	void	*mlx;
-	void	*win;
-	int		zoom;
-	int		color;
-	int		height;
-	int		offset_x;
-	int		offset_y;
-	double	factor;
-	t_seg	seg;
+	int			y_map;
+	int			x_map;
+	int			h_map;
+	int			x_win;
+	int			y_win;
+	t_img		*image;
+	int			**draw;
+	void		*mlx;
+	void		*win;
+	int			zoom;
+	int			color;
+	int			height;
+	int			offset_x;
+	int			offset_y;
+	double		factor;
+	t_seg		seg;
 }					t_map;
 
+int					check_coord(char *line);
 void				read_map(char *av, t_env *env, t_map *map, int flag);
 void				ft_freetab(char **tab);
 void				error_length(void);
@@ -67,4 +80,6 @@ void				draw_map(t_env *env, t_map *map);
 int					ft_keyhook(int keycode, t_map *map);
 void				put_map(t_map *map);
 int					get_color(t_map *map);
+int					my_pixel_image(t_img *im, unsigned int color, int x, int y);
+void				draw_again(t_map *map);
 #endif

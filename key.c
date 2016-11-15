@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 15:08:39 by lleverge          #+#    #+#             */
-/*   Updated: 2016/11/03 15:10:38 by lleverge         ###   ########.fr       */
+/*   Updated: 2016/11/04 17:37:49 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int				ft_keyhook(int keycode, t_map *map)
 {
 	if (keycode == 53 || keycode == 12)
 		do_exit();
-	else if (keycode == 69 || keycode == 24)
+	else if ((keycode == 69 || keycode == 24) && map->zoom < 30)
 		map->zoom += 1;
 	else if (keycode == 78 || keycode == 27)
 		map->zoom -= 1;
@@ -69,6 +69,6 @@ int				ft_keyhook(int keycode, t_map *map)
 	else if (keycode == 83 || keycode == 84)
 		modif_persp(map, keycode);
 	mlx_clear_window(map->mlx, map->win);
-	put_map(map);
+	draw_again(map);
 	return (0);
 }

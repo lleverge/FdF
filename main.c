@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 14:59:45 by lleverge          #+#    #+#             */
-/*   Updated: 2016/11/03 15:26:27 by lleverge         ###   ########.fr       */
+/*   Updated: 2016/11/07 12:24:30 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ int					main(int ac, char **av, char **environ)
 	map = init_map();
 	read_map(av[1], env, map, 1);
 	draw_map(env, map);
+	mlx_destroy_window(env->mlx, env->win);
 	return (0);
 }
