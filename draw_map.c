@@ -6,7 +6,11 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:51:41 by lleverge          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2016/11/15 12:14:38 by lleverge         ###   ########.fr       */
+=======
+/*   Updated: 2016/11/07 11:57:10 by lleverge         ###   ########.fr       */
+>>>>>>> 2e416b7108565c9303634c9afdb12359857cfd94
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +43,11 @@ void			draw_again(t_map *map)
 {
 	map->image->image = mlx_new_image(map->mlx, map->x_win, map->y_win);
 	put_map(map);
+<<<<<<< HEAD
 q	mlx_put_image_to_window(map->mlx, map->win, map->image->image, 0, 0);
+=======
+	mlx_put_image_to_window(map->mlx, map->win, map->image->image, 0, 0);
+>>>>>>> 2e416b7108565c9303634c9afdb12359857cfd94
 	mlx_destroy_image(map->mlx, map->image->image);
 	mlx_key_hook(map->win, &ft_keyhook, map);
 	mlx_loop(map->mlx);
